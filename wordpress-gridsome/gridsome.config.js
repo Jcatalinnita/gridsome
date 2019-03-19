@@ -6,5 +6,20 @@
 
 module.exports = {
   siteName: 'Gridsome',
-  plugins: []
+  plugins: [
+    {
+      use: '@gridsome/source-wordpress',
+      options: {
+        baseUrl: 'http://wordpress.cnel6.shrd-dev.jellyfish.local/index.php/', // required
+        apiBase: 'wp-json',
+        typeName: 'WordPress',
+        perPage: 100,
+        concurrent: 10,
+        routes: {
+          post: '/post/:slug',
+          page: '/page/:slug'
+        }
+      }
+    }
+  ]
 }

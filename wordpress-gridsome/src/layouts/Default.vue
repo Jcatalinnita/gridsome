@@ -2,11 +2,11 @@
   <div class="layout">
     <header class="header">
       <strong>
-        <g-link to="/">{{ $static.metaData.siteName }}</g-link>
+        <g-link to="/">Sample app</g-link>
       </strong>
       <nav class="nav">
         <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about">About</g-link>
+        <g-link class="nav__link" v-for="page, index in $static.pages.edges" :to="page.node.path">{{page.node.title}}</g-link>
       </nav>
     </header>
     <slot/>
@@ -14,12 +14,19 @@
 </template>
 
 <static-query>
-query {
-  metaData {
-    siteName
+query Pages {
+  pages: allWordPressPage {
+    edges {
+      node {
+        id
+        title
+        path
+      }
+    }
   }
 }
 </static-query>
+
 
 <style>
 body {
